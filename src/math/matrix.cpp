@@ -14,6 +14,9 @@
 
 #include "selfea/math/matrix.hpp"
 
+#include <sstream>
+#include <stdexcept>
+
 namespace selfea { namespace math {
 
 
@@ -33,7 +36,23 @@ Matrix::Matrix(const std::size_t num_rows, const std::size_t num_cols,
 
 Real_t& Matrix::operator()(const std::size_t i, const std::size_t j)
 {
-    return matrix_[i*num_rows_ + j];
+#ifndef NDEBUG
+    // The Matrix accessor could be called many, many times, and therefore
+    // the bounds checking will only be done when build in "Debug" mode.
+    if (i >= num_rows_)
+    {
+	std::stringstream msg("");
+	msg << "row index '" << i << "' out of bounds [0," << num_rows_-1 << "]";
+	throw std::range_error(msg.str());
+    }
+    if (j >= num_cols_)
+    {
+	std::stringstream msg("");
+	msg << "column index '" << j << "' out of bounds [0," << num_cols_-1 << "]";
+	throw std::range_error(msg.str());
+    }
+#endif // ifndef NDEBUG
+    return matrix_[i + j*num_rows_];
 }
 
 

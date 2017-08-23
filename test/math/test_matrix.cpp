@@ -14,6 +14,8 @@
 
 #include "selfea/math/matrix.hpp"
 
+#include <sstream>
+
 #include <gtest/gtest.h>
 
 
@@ -74,4 +76,62 @@ TEST(MathMatrixTest, AssignElement) {
 	    }
 	}
     }
+}
+
+
+TEST(MathMatrixTest, AccessorColumnOutOfBounds) {
+    const int m = 3;
+    const int n = 5;
+    const Real_t v1 = -0.87;
+    selfea::math::Matrix A(m, n, v1);
+#ifndef NDEBUG
+    // In "Debug" mode we do bounds checking on the accessor.
+    std::stringstream msg("");
+    msg << "column index '" << n << "' out of bounds [0," << n-1 << "]";
+    EXPECT_THROW(
+	{
+	    try
+	    {
+		A(m-1,n);
+	    }
+	    catch ( const std::range_error& e )
+	    {
+		EXPECT_EQ(msg.str(), e.what());
+		throw;
+	    }
+	},
+	std::range_error);
+#else // ifndef NDEBUG
+    // In "Release" mode we do not do bounds checking on the accessor.
+    EXPECT_NE(v1, A(m-1,n));
+#endif // ifndef NDEBUG
+}
+
+
+TEST(MathMatrixTest, AccessorRowOutOfBounds) {
+    const int m = 3;
+    const int n = 5;
+    const Real_t v1 = -0.87;
+    selfea::math::Matrix A(m, n, v1);
+#ifndef NDEBUG
+    // In "Debug" mode we do bounds checking on the accessor.
+    std::stringstream msg("");
+    msg << "row index '" << m << "' out of bounds [0," << m-1 << "]";
+    EXPECT_THROW(
+	{
+	    try
+	    {
+		A(m,n-1);
+	    }
+	    catch ( const std::range_error& e )
+	    {
+		EXPECT_EQ(msg.str(), e.what());
+		throw;
+	    }
+	},
+	std::range_error);
+#else // ifndef NDEBUG
+    // In "Release" mode we do not do bounds checking on the accessor.
+    EXPECT_NE(v1, A(m,n-1));
+#endif // ifndef NDEBUG
 }
