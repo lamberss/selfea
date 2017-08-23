@@ -29,7 +29,6 @@ public:
     Matrix(const std::size_t num_rows, const std::size_t num_cols=0,
 	   const Real_t value=0.0);
 
-    const Real_t& operator()(const std::size_t i, const std::size_t j) const;
     Real_t& operator()(const std::size_t i, const std::size_t j);
 
 private:

@@ -31,12 +31,6 @@ Matrix::Matrix(const std::size_t num_rows, const std::size_t num_cols,
 }
 
 
-const Real_t& Matrix::operator()(const std::size_t i, const std::size_t j) const
-{
-    return matrix_[i*num_rows_ + j];
-}
-
-
 Real_t& Matrix::operator()(const std::size_t i, const std::size_t j)
 {
     return matrix_[i*num_rows_ + j];
