@@ -30,6 +30,8 @@ public:
 	   const Real_t value=0.0);
 
     Real_t& operator()(const std::size_t i, const std::size_t j);
+    Matrix& operator+=(const Matrix& rhs);
+    Matrix& operator+=(const Real_t& rhs);
 
 private:
     std::size_t num_cols_;

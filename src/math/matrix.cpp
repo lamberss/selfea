@@ -56,4 +56,34 @@ Real_t& Matrix::operator()(const std::size_t i, const std::size_t j)
 }
 
 
+Matrix& Matrix::operator+=(const Real_t& rhs)
+{
+    for (std::size_t i = 0; i < num_rows_*num_cols_; i++)
+    {
+	matrix_[i] += rhs;
+    }
+    return *this;
+}
+
+
+Matrix& Matrix::operator+=(const Matrix& rhs)
+{
+    if ( num_rows_ != rhs.num_rows_ || num_cols_ != rhs.num_cols_ )
+    {
+	std::stringstream msg("");
+	msg << "lhs and rhs matrices incompatible sizes: ";
+	msg << num_rows_ << "x" << num_cols_ << " != ";
+	msg << rhs.num_rows_ << "x" << rhs.num_cols_;
+	throw std::length_error(msg.str());
+    }
+
+    for (std::size_t i = 0; i < num_rows_*num_cols_; i++)
+    {
+	matrix_[i] += rhs.matrix_[i];
+    }
+    
+    return *this;
+}
+
+
 }}  // namespace selfea::math
