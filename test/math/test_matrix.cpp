@@ -137,6 +137,69 @@ TEST(MathMatrixTest, AccessorRowOutOfBounds) {
 }
 
 
+TEST(MathMatrixTest, Minus) {
+    const int m = 3;
+    const int n = 5;
+    const Real_t v1 = -0.87;
+    const Real_t v2 =  1.0;
+    selfea::math::Matrix A(m, n, v1);
+    selfea::math::Matrix B(m, n, v1);
+    selfea::math::Matrix C(m, m, v1);
+    selfea::math::Matrix D(m, n);
+
+    D = A - B;
+    for (auto i=0; i<m; ++i)
+    {
+	for (auto j=0; j<n; ++j)
+	{
+	    EXPECT_EQ(0.0, D(i,j));
+	}
+    }
+
+    D = A - B - v2;
+    for (auto i=0; i<m; ++i)
+    {
+	for (auto j=0; j<n; ++j)
+	{
+	    EXPECT_EQ(-v2, D(i,j));
+	}
+    }
+
+    EXPECT_THROW( D = A - C, std::length_error );
+}
+
+
+TEST(MathMatrixTest, MinusEqual) {
+    const int m = 3;
+    const int n = 5;
+    const Real_t v1 = -0.87;
+    const Real_t v2 =  1.0;
+    selfea::math::Matrix A(m, n, v1);
+    selfea::math::Matrix B(m, n, v1);
+    selfea::math::Matrix C(m, m, v1);
+
+    A -= B;
+    for (auto i=0; i<m; ++i)
+    {
+	for (auto j=0; j<n; ++j)
+	{
+	    EXPECT_EQ(0.0, A(i,j));
+	}
+    }
+
+    A -= v2;
+    for (auto i=0; i<m; ++i)
+    {
+	for (auto j=0; j<n; ++j)
+	{
+	    EXPECT_EQ(-v2, A(i,j));
+	}
+    }
+
+    EXPECT_THROW( A -= C, std::length_error );
+}
+
+
 TEST(MathMatrixTest, Plus) {
     const int m = 3;
     const int n = 5;
