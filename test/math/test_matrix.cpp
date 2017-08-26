@@ -24,6 +24,23 @@ TEST(MathMatrixTest, ConstructorDefault) {
 }
 
 
+TEST(MathMatrixTest, ConstructorInitializerList) {
+    const int m = 3;
+    const int n = 1;
+    selfea::math::Matrix A = {1.0, 2.0, 3.0};
+
+    EXPECT_EQ(m, A.rows());
+    EXPECT_EQ(n, A.cols());
+    for (auto i=0; i<m; ++i)
+    {
+	for (auto j=0; j<n; ++j)
+	{
+	    EXPECT_EQ(static_cast<Real_t>(i+1), A(i,j));
+	}
+    }
+}
+
+
 TEST(MathMatrixTest, ConstructorSquare) {
     const int m = 5;
     const int n = m;
@@ -137,6 +154,15 @@ TEST(MathMatrixTest, AccessorRowOutOfBounds) {
 }
 
 
+TEST(MathMatrixTest, Compare) {
+    selfea::math::Matrix A = { 1.0, 2.0, 3.0 };
+    selfea::math::Matrix B = { 1.0, 2.0, 3.0 };
+    selfea::math::Matrix C = { 1.0, 2.0, 5.0 };
+    EXPECT_EQ(A, B);
+    EXPECT_NE(A, C);
+}
+
+
 TEST(MathMatrixTest, Minus) {
     const int m = 3;
     const int n = 5;
@@ -200,6 +226,35 @@ TEST(MathMatrixTest, MinusEqual) {
 }
 
 
+TEST(MathMatrixTest, Multiply) {
+    const int m = 2;
+    const int n = 3;
+    selfea::math::Matrix A = { 1.0, 4.0, 2.0, 5.0, 3.0, 6.0 };
+    selfea::math::Matrix B = { 7.0, 9.0, 11.0, 8.0, 10.0, 12.0 };
+    selfea::math::Matrix C = { 58.0, 139.0, 64.0, 154.0 };
+
+    A.reshape(m, n);
+    B.reshape(n, m);
+    C.reshape(m, m);
+
+    selfea::math::Matrix D = A * B;
+    EXPECT_EQ(C, D);
+
+    const Real_t v = 2.0;
+    for (auto i = 0; i<m; ++i)
+    {
+	for ( auto j = 0; j<m; ++j)
+	{
+	    C(i,j) = C(i,j) * v;
+	}
+    }
+    selfea::math::Matrix E = v * D;
+    EXPECT_EQ(C, E);
+
+    EXPECT_THROW( A * C, std::length_error );
+}
+
+
 TEST(MathMatrixTest, Plus) {
     const int m = 3;
     const int n = 5;
@@ -260,4 +315,21 @@ TEST(MathMatrixTest, PlusEqual) {
     }
 
     EXPECT_THROW( A += C, std::length_error );
+}
+
+
+TEST(MathMatrixTest, Reshape) {
+    selfea::math::Matrix A = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
+    EXPECT_EQ(6, A.rows());
+    EXPECT_EQ(1, A.cols());
+
+    const int m = 2;
+    const int n = 3;
+    A.reshape(m, n);
+    selfea::math::Matrix B(m, n);
+    B(0,0) = 1.0; B(0,1) = 3.0; B(0,2) = 5.0;
+    B(1,0) = 2.0; B(1,1) = 4.0; B(1,2) = 6.0;
+    EXPECT_EQ(A, B);
+
+    EXPECT_THROW(A.reshape(m+5,n), std::length_error);
 }

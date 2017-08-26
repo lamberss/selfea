@@ -26,20 +26,36 @@ namespace selfea { namespace math {
 class Matrix {
 public:
     Matrix();
+    Matrix(std::initializer_list<Real_t> l);
     Matrix(const std::size_t num_rows, const std::size_t num_cols=0,
 	   const Real_t value=0.0);
 
     Real_t& operator()(const std::size_t i, const std::size_t j);
+    const Real_t& operator()(const std::size_t i, const std::size_t j) const;
+
+    bool operator==(const Matrix& rhs) const;
+    bool operator!=(const Matrix& rhs) const { return !(*this == rhs); }
     
     Matrix& operator+=(const Matrix& rhs);
     Matrix& operator+=(const Real_t& rhs);
+    // TODO: see if the below implementation makes too many copies.
     friend Matrix operator+(Matrix lhs, const Matrix& rhs) { lhs+=rhs; return lhs; }
     friend Matrix operator+(Matrix lhs, const Real_t& rhs) { lhs+=rhs; return lhs; }
 
     Matrix& operator-=(const Matrix& rhs);
     Matrix& operator-=(const Real_t& rhs);
+    // TODO: see if the below implementation makes too many copies.
     friend Matrix operator-(Matrix lhs, const Matrix& rhs) { lhs-=rhs; return lhs; }
     friend Matrix operator-(Matrix lhs, const Real_t& rhs) { lhs-=rhs; return lhs; }
+
+    friend Matrix operator*(const Matrix& lhs, const Matrix& rhs);
+    friend Matrix operator*(const Matrix& lhs, const Real_t& rhs);
+    friend Matrix operator*(const Real_t& lhs, const Matrix& rhs) { return rhs * lhs; }
+
+    std::size_t cols() const { return num_cols_; }
+    std::size_t rows() const { return num_rows_; }
+
+    void reshape(const std::size_t i, const std::size_t j);
 
 private:
     std::size_t num_cols_;
