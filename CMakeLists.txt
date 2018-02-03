@@ -42,6 +42,7 @@ configure_file("${PROJECT_SOURCE_DIR}/include/selfea/config.hpp.in"
 include_directories("${PROJECT_BINARY_DIR}/include"
   "${PROJECT_SOURCE_DIR}/include")
 
+add_subdirectory(externals)
 add_subdirectory(src)
 add_subdirectory(test)
 add_subdirectory(examples)
