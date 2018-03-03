@@ -1,4 +1,4 @@
-// Copyright 2017 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ namespace selfea { namespace material {
 class Isotropic : public Material {
 public:
     Isotropic();
-    Isotropic(const std::string name, const Real_t p1, const Real_t p2,
-	      const Real_t density=0.0);
+    Isotropic(std::string name, Real_t p1, Real_t p2, Real_t density=0.0);
 
     const Real_t& get_elastic_modulus() const { return E_; };
     const Real_t& get_poissons_ratio() const { return nu_; };
@@ -38,6 +37,7 @@ private:
 };
 
 
-}}  // namespace selfea::material
+}  // namespace material
+}  // namespace selfea
 
 #endif  // SELFEA_MATERIAL_ISOTROPIC_H_

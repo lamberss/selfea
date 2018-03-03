@@ -1,4 +1,4 @@
-// Copyright 2016 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,16 +32,18 @@ Matrix::Matrix(std::initializer_list<Real_t> l)
 }
 
 
-Matrix::Matrix(const std::size_t num_rows, const std::size_t num_cols,
-	       const Real_t value)
+Matrix::Matrix(std::size_t num_rows, std::size_t num_cols, Real_t value)
     : num_cols_(num_cols), num_rows_(num_rows), matrix_(0)
 {
-    if (num_cols_ <= 0) num_cols_ = num_rows_;
+    if (num_cols_ <= 0)
+    {
+	num_cols_ = num_rows_;
+    }
     matrix_.resize(num_rows_ * num_cols_, value);
 }
 
 
-Real_t& Matrix::operator()(const std::size_t i, const std::size_t j)
+Real_t& Matrix::operator()(std::size_t i, std::size_t j)
 {
 #ifndef NDEBUG
     // The Matrix accessor could be called many, many times, and therefore
@@ -63,7 +65,7 @@ Real_t& Matrix::operator()(const std::size_t i, const std::size_t j)
 }
 
 
-const Real_t& Matrix::operator()(const std::size_t i, const std::size_t j) const
+const Real_t& Matrix::operator()(std::size_t i, std::size_t j) const
 {
 #ifndef NDEBUG
     // The Matrix accessor could be called many, many times, and therefore
@@ -129,7 +131,7 @@ Matrix& Matrix::operator-=(const Matrix& rhs)
     {
 	matrix_[i] -= rhs.matrix_[i];
     }
-    
+
     return *this;
 }
 
@@ -159,7 +161,7 @@ Matrix& Matrix::operator+=(const Matrix& rhs)
     {
 	matrix_[i] += rhs.matrix_[i];
     }
-    
+
     return *this;
 }
 
@@ -211,9 +213,9 @@ Matrix operator*(const Matrix& lhs, const Real_t& rhs)
 }
 
 
-void Matrix::reshape(const std::size_t i, const std::size_t j)
+void Matrix::reshape(std::size_t i, std::size_t j)
 {
-    if ( (i * j) != (num_rows_*num_cols_) ) 
+    if ( (i * j) != (num_rows_*num_cols_) )
     {
 	std::stringstream msg("");
 	msg << "Cannot reshape to (" << i << "," << j << ").";
@@ -224,4 +226,5 @@ void Matrix::reshape(const std::size_t i, const std::size_t j)
 }
 
 
-}}  // namespace selfea::math
+}  // namespace math
+}  // namespace selfea

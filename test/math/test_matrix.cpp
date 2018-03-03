@@ -1,4 +1,4 @@
-// Copyright 2017 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@ TEST(MathMatrixTest, ConstructorDefault) {
 
 
 TEST(MathMatrixTest, ConstructorInitializerList) {
-    const int m = 3;
-    const int n = 1;
+    const unsigned int m = 3u;
+    const unsigned int n = 1u;
     selfea::math::Matrix A = {1.0, 2.0, 3.0};
 
     EXPECT_EQ(m, A.rows());
     EXPECT_EQ(n, A.cols());
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(static_cast<Real_t>(i+1), A(i,j));
 	}
@@ -42,12 +42,12 @@ TEST(MathMatrixTest, ConstructorInitializerList) {
 
 
 TEST(MathMatrixTest, ConstructorSquare) {
-    const int m = 5;
-    const int n = m;
+    const unsigned int m = 5u;
+    const unsigned int n = m;
     selfea::math::Matrix A(m);
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(0.0, A(i,j));
 	}
@@ -56,13 +56,13 @@ TEST(MathMatrixTest, ConstructorSquare) {
 
 
 TEST(MathMatrixTest, ConstructorValue) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v = -0.87;
     selfea::math::Matrix A(m, n, v);
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(v, A(i,j));
 	}
@@ -71,17 +71,17 @@ TEST(MathMatrixTest, ConstructorValue) {
 
 
 TEST(MathMatrixTest, AssignElement) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     const Real_t v2 = 1.49;
-    const int I = 2;
-    const int J = 4;
+    const unsigned int I = 2u;
+    const unsigned int J = 4u;
     selfea::math::Matrix A(m, n, v1);
     A(I,J) = v2;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    if (I == i && J == j)
 	    {
@@ -97,8 +97,8 @@ TEST(MathMatrixTest, AssignElement) {
 
 
 TEST(MathMatrixTest, AccessorColumnOutOfBounds) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     selfea::math::Matrix A(m, n, v1);
 #ifndef NDEBUG
@@ -126,8 +126,8 @@ TEST(MathMatrixTest, AccessorColumnOutOfBounds) {
 
 
 TEST(MathMatrixTest, AccessorRowOutOfBounds) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     selfea::math::Matrix A(m, n, v1);
 #ifndef NDEBUG
@@ -164,8 +164,8 @@ TEST(MathMatrixTest, Compare) {
 
 
 TEST(MathMatrixTest, Minus) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     const Real_t v2 =  1.0;
     selfea::math::Matrix A(m, n, v1);
@@ -174,18 +174,18 @@ TEST(MathMatrixTest, Minus) {
     selfea::math::Matrix D(m, n);
 
     D = A - B;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(0.0, D(i,j));
 	}
     }
 
     D = A - B - v2;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(-v2, D(i,j));
 	}
@@ -196,8 +196,8 @@ TEST(MathMatrixTest, Minus) {
 
 
 TEST(MathMatrixTest, MinusEqual) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     const Real_t v2 =  1.0;
     selfea::math::Matrix A(m, n, v1);
@@ -205,18 +205,18 @@ TEST(MathMatrixTest, MinusEqual) {
     selfea::math::Matrix C(m, m, v1);
 
     A -= B;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(0.0, A(i,j));
 	}
     }
 
     A -= v2;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(-v2, A(i,j));
 	}
@@ -227,8 +227,8 @@ TEST(MathMatrixTest, MinusEqual) {
 
 
 TEST(MathMatrixTest, Multiply) {
-    const int m = 2;
-    const int n = 3;
+    const unsigned int m = 2u;
+    const unsigned int n = 3u;
     selfea::math::Matrix A = { 1.0, 4.0, 2.0, 5.0, 3.0, 6.0 };
     selfea::math::Matrix B = { 7.0, 9.0, 11.0, 8.0, 10.0, 12.0 };
     selfea::math::Matrix C = { 58.0, 139.0, 64.0, 154.0 };
@@ -241,9 +241,9 @@ TEST(MathMatrixTest, Multiply) {
     EXPECT_EQ(C, D);
 
     const Real_t v = 2.0;
-    for (auto i = 0; i<m; ++i)
+    for (auto i = 0u; i<m; ++i)
     {
-	for ( auto j = 0; j<m; ++j)
+	for ( auto j = 0u; j<m; ++j)
 	{
 	    C(i,j) = C(i,j) * v;
 	}
@@ -256,8 +256,8 @@ TEST(MathMatrixTest, Multiply) {
 
 
 TEST(MathMatrixTest, Plus) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     const Real_t v2 =  1.0;
     selfea::math::Matrix A(m, n, v1);
@@ -266,18 +266,18 @@ TEST(MathMatrixTest, Plus) {
     selfea::math::Matrix D(m, n);
 
     D = A + B;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(0.0, D(i,j));
 	}
     }
 
     D = A + B + v2;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(v2, D(i,j));
 	}
@@ -288,8 +288,8 @@ TEST(MathMatrixTest, Plus) {
 
 
 TEST(MathMatrixTest, PlusEqual) {
-    const int m = 3;
-    const int n = 5;
+    const unsigned int m = 3u;
+    const unsigned int n = 5u;
     const Real_t v1 = -0.87;
     const Real_t v2 =  1.0;
     selfea::math::Matrix A(m, n, v1);
@@ -297,18 +297,18 @@ TEST(MathMatrixTest, PlusEqual) {
     selfea::math::Matrix C(m, m, v1);
 
     A += B;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(0.0, A(i,j));
 	}
     }
 
     A += v2;
-    for (auto i=0; i<m; ++i)
+    for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0; j<n; ++j)
+	for (auto j=0u; j<n; ++j)
 	{
 	    EXPECT_EQ(v2, A(i,j));
 	}
@@ -320,11 +320,11 @@ TEST(MathMatrixTest, PlusEqual) {
 
 TEST(MathMatrixTest, Reshape) {
     selfea::math::Matrix A = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    EXPECT_EQ(6, A.rows());
-    EXPECT_EQ(1, A.cols());
+    EXPECT_EQ(6u, A.rows());
+    EXPECT_EQ(1u, A.cols());
 
-    const int m = 2;
-    const int n = 3;
+    const unsigned int m = 2u;
+    const unsigned int n = 3u;
     A.reshape(m, n);
     selfea::math::Matrix B(m, n);
     B(0,0) = 1.0; B(0,1) = 3.0; B(0,2) = 5.0;

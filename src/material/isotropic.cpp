@@ -1,4 +1,4 @@
-// Copyright 2017 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
 namespace selfea { namespace material {
 
 
-Isotropic::Isotropic() : Material(), E_(0.0), nu_(0.0) {}
+Isotropic::Isotropic() : E_(0.0), nu_(0.0) {}
 
-Isotropic::Isotropic(const std::string name, const Real_t p1, const Real_t p2,
-		     const Real_t density) :
-    Material(name, density), E_(p1), nu_(p2) {}
+Isotropic::Isotropic(std::string name, Real_t p1, Real_t p2, Real_t density) :
+    Material(std::move(name), density), E_(p1), nu_(p2) {}
 
 
-}}  // namespace selfea::material
+}  // namespace material
+}  // namespace selfea

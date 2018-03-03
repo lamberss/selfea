@@ -1,4 +1,4 @@
-// Copyright 2017 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ namespace selfea { namespace material {
 class Material {
 public:
     Material();
-    Material(const std::string name, const Real_t density);
+    Material(std::string name, Real_t density);
 
     const Real_t& get_density() const { return density_; };
     const std::string& get_name() const { return name_; };
@@ -36,6 +36,7 @@ private:
 };
 
 
-}}  // namespace selfea::material
+}  // namespace material
+}  // namespace selfea
 
 #endif  // SELFEA_MATERIAL_MATERIAL_H_

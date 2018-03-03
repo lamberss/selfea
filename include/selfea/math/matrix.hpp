@@ -1,4 +1,4 @@
-// Copyright 2017 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
+// Copyright 2018 Steven E. Lamberson, Jr. <steven.lamberson@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,15 +27,14 @@ class Matrix {
 public:
     Matrix();
     Matrix(std::initializer_list<Real_t> l);
-    Matrix(const std::size_t num_rows, const std::size_t num_cols=0,
-	   const Real_t value=0.0);
+    Matrix(std::size_t num_rows, std::size_t num_cols=0, Real_t value=0.0);
 
-    Real_t& operator()(const std::size_t i, const std::size_t j);
-    const Real_t& operator()(const std::size_t i, const std::size_t j) const;
+    Real_t& operator()(std::size_t i, std::size_t j);
+    const Real_t& operator()(std::size_t i, std::size_t j) const;
 
     bool operator==(const Matrix& rhs) const;
     bool operator!=(const Matrix& rhs) const { return !(*this == rhs); }
-    
+
     Matrix& operator+=(const Matrix& rhs);
     Matrix& operator+=(const Real_t& rhs);
     // TODO: see if the below implementation makes too many copies.
@@ -55,7 +54,7 @@ public:
     std::size_t cols() const { return num_cols_; }
     std::size_t rows() const { return num_rows_; }
 
-    void reshape(const std::size_t i, const std::size_t j);
+    void reshape(std::size_t i, std::size_t j);
 
 private:
     std::size_t num_cols_;
