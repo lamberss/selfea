@@ -51,19 +51,20 @@ Real_t& Matrix::operator()(std::size_t i, std::size_t j)
     if (i >= num_rows_)
     {
         std::stringstream msg("");
-        msg << "row index '" << i << "' out of bounds [0," << num_rows_-1 << "]";
+        msg << "row index '" << i << "' out of bounds [0," << num_rows_-1
+            << "]";
         throw std::range_error(msg.str());
     }
     if (j >= num_cols_)
     {
         std::stringstream msg("");
-        msg << "column index '" << j << "' out of bounds [0," << num_cols_-1 << "]";
+        msg << "column index '" << j << "' out of bounds [0," << num_cols_-1
+            << "]";
         throw std::range_error(msg.str());
     }
 #endif // ifndef NDEBUG
     return matrix_[i + j*num_rows_];
 }
-
 
 const Real_t& Matrix::operator()(std::size_t i, std::size_t j) const
 {
@@ -73,13 +74,15 @@ const Real_t& Matrix::operator()(std::size_t i, std::size_t j) const
     if (i >= num_rows_)
     {
         std::stringstream msg("");
-        msg << "row index '" << i << "' out of bounds [0," << num_rows_-1 << "]";
+        msg << "row index '" << i << "' out of bounds [0," << num_rows_-1
+            << "]";
         throw std::range_error(msg.str());
     }
     if (j >= num_cols_)
     {
         std::stringstream msg("");
-        msg << "column index '" << j << "' out of bounds [0," << num_cols_-1 << "]";
+        msg << "column index '" << j << "' out of bounds [0," << num_cols_-1
+            << "]";
         throw std::range_error(msg.str());
     }
 #endif // ifndef NDEBUG
