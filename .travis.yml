@@ -10,10 +10,10 @@ before_install:
 
 install:
   # update to gcc with C++11 support
-  - sudo apt-get -qq install gcc-6 g++-6
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 90
+  - sudo apt-get -qq install gcc-7 g++-7
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-7 90
   # install latest LCOV (1.9 was failing)
   - cd ${TRAVIS_BUILD_DIR}
   - wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
