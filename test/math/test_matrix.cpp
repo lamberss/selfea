@@ -33,10 +33,10 @@ TEST(MathMatrixTest, ConstructorInitializerList) {
     EXPECT_EQ(n, A.cols());
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(static_cast<Real_t>(i+1), A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(static_cast<Real_t>(i+1), A(i,j));
+        }
     }
 }
 
@@ -47,10 +47,10 @@ TEST(MathMatrixTest, ConstructorSquare) {
     selfea::math::Matrix A(m);
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(0.0, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(0.0, A(i,j));
+        }
     }
 }
 
@@ -62,10 +62,10 @@ TEST(MathMatrixTest, ConstructorValue) {
     selfea::math::Matrix A(m, n, v);
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(v, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(v, A(i,j));
+        }
     }
 }
 
@@ -81,17 +81,17 @@ TEST(MathMatrixTest, AssignElement) {
     A(I,J) = v2;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    if (I == i && J == j)
-	    {
-		EXPECT_EQ(v2, A(i,j));
-	    }
-	    else
-	    {
-		EXPECT_EQ(v1, A(i,j));
-	    }
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            if (I == i && J == j)
+            {
+                EXPECT_EQ(v2, A(i,j));
+            }
+            else
+            {
+                EXPECT_EQ(v1, A(i,j));
+            }
+        }
     }
 }
 
@@ -106,18 +106,18 @@ TEST(MathMatrixTest, AccessorColumnOutOfBounds) {
     std::stringstream msg("");
     msg << "column index '" << n << "' out of bounds [0," << n-1 << "]";
     EXPECT_THROW(
-	{
-	    try
-	    {
-		A(m-1,n);
-	    }
-	    catch ( const std::range_error& e )
-	    {
-		EXPECT_EQ(msg.str(), e.what());
-		throw;
-	    }
-	},
-	std::range_error);
+        {
+            try
+            {
+                A(m-1,n);
+            }
+            catch ( const std::range_error& e )
+            {
+                EXPECT_EQ(msg.str(), e.what());
+                throw;
+            }
+        },
+        std::range_error);
 #else // ifndef NDEBUG
     // In "Release" mode we do not do bounds checking on the accessor.
     EXPECT_NE(v1, A(m-1,n));
@@ -135,18 +135,18 @@ TEST(MathMatrixTest, AccessorRowOutOfBounds) {
     std::stringstream msg("");
     msg << "row index '" << m << "' out of bounds [0," << m-1 << "]";
     EXPECT_THROW(
-	{
-	    try
-	    {
-		A(m,n-1);
-	    }
-	    catch ( const std::range_error& e )
-	    {
-		EXPECT_EQ(msg.str(), e.what());
-		throw;
-	    }
-	},
-	std::range_error);
+        {
+            try
+            {
+                A(m,n-1);
+            }
+            catch ( const std::range_error& e )
+            {
+                EXPECT_EQ(msg.str(), e.what());
+                throw;
+            }
+        },
+        std::range_error);
 #else // ifndef NDEBUG
     // In "Release" mode we do not do bounds checking on the accessor.
     EXPECT_NE(v1, A(m,n-1));
@@ -176,19 +176,19 @@ TEST(MathMatrixTest, Minus) {
     D = A - B;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(0.0, D(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(0.0, D(i,j));
+        }
     }
 
     D = A - B - v2;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(-v2, D(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(-v2, D(i,j));
+        }
     }
 
     EXPECT_THROW( D = A - C, std::length_error );
@@ -207,19 +207,19 @@ TEST(MathMatrixTest, MinusEqual) {
     A -= B;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(0.0, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(0.0, A(i,j));
+        }
     }
 
     A -= v2;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(-v2, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(-v2, A(i,j));
+        }
     }
 
     EXPECT_THROW( A -= C, std::length_error );
@@ -243,10 +243,10 @@ TEST(MathMatrixTest, Multiply) {
     const Real_t v = 2.0;
     for (auto i = 0u; i<m; ++i)
     {
-	for ( auto j = 0u; j<m; ++j)
-	{
-	    C(i,j) = C(i,j) * v;
-	}
+        for ( auto j = 0u; j<m; ++j)
+        {
+            C(i,j) = C(i,j) * v;
+        }
     }
     selfea::math::Matrix E = v * D;
     EXPECT_EQ(C, E);
@@ -268,19 +268,19 @@ TEST(MathMatrixTest, Plus) {
     D = A + B;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(0.0, D(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(0.0, D(i,j));
+        }
     }
 
     D = A + B + v2;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(v2, D(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(v2, D(i,j));
+        }
     }
 
     EXPECT_THROW( D = A + C, std::length_error );
@@ -299,19 +299,19 @@ TEST(MathMatrixTest, PlusEqual) {
     A += B;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(0.0, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(0.0, A(i,j));
+        }
     }
 
     A += v2;
     for (auto i=0u; i<m; ++i)
     {
-	for (auto j=0u; j<n; ++j)
-	{
-	    EXPECT_EQ(v2, A(i,j));
-	}
+        for (auto j=0u; j<n; ++j)
+        {
+            EXPECT_EQ(v2, A(i,j));
+        }
     }
 
     EXPECT_THROW( A += C, std::length_error );

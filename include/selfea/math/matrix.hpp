@@ -38,18 +38,37 @@ public:
     Matrix& operator+=(const Matrix& rhs);
     Matrix& operator+=(const Real_t& rhs);
     // TODO: see if the below implementation makes too many copies.
-    friend Matrix operator+(Matrix lhs, const Matrix& rhs) { lhs+=rhs; return lhs; }
-    friend Matrix operator+(Matrix lhs, const Real_t& rhs) { lhs+=rhs; return lhs; }
+    friend Matrix operator+(Matrix lhs, const Matrix& rhs)
+    {
+        lhs+=rhs;
+        return lhs;
+    }
+    friend Matrix operator+(Matrix lhs, const Real_t& rhs)
+    {
+        lhs+=rhs;
+        return lhs;
+    }
 
     Matrix& operator-=(const Matrix& rhs);
     Matrix& operator-=(const Real_t& rhs);
     // TODO: see if the below implementation makes too many copies.
-    friend Matrix operator-(Matrix lhs, const Matrix& rhs) { lhs-=rhs; return lhs; }
-    friend Matrix operator-(Matrix lhs, const Real_t& rhs) { lhs-=rhs; return lhs; }
+    friend Matrix operator-(Matrix lhs, const Matrix& rhs)
+    {
+        lhs-=rhs;
+        return lhs;
+    }
+    friend Matrix operator-(Matrix lhs, const Real_t& rhs)
+    {
+        lhs-=rhs;
+        return lhs;
+    }
 
     friend Matrix operator*(const Matrix& lhs, const Matrix& rhs);
     friend Matrix operator*(const Matrix& lhs, const Real_t& rhs);
-    friend Matrix operator*(const Real_t& lhs, const Matrix& rhs) { return rhs * lhs; }
+    friend Matrix operator*(const Real_t& lhs, const Matrix& rhs)
+    {
+        return rhs * lhs;
+    }
 
     std::size_t cols() const { return num_cols_; }
     std::size_t rows() const { return num_rows_; }

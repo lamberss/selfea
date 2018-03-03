@@ -27,6 +27,6 @@ int main(void)
     Real_t r = 5.0;
 
     std::cout << "Real_t works! " << r << std::endl;
-    
+
     return(0);
 }
