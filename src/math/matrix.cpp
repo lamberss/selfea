@@ -14,6 +14,7 @@
 
 #include "selfea/math/matrix.hpp"
 
+#include <initializer_list>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>

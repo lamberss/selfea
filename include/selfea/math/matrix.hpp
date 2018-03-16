@@ -15,7 +15,7 @@
 #ifndef SELFEA_MATH_MATRIX_H_
 #define SELFEA_MATH_MATRIX_H_
 
-#include <cstddef>
+#include <initializer_list>
 #include <vector>
 
 #include "selfea/config.hpp"
@@ -82,6 +82,7 @@ private:
 };
 
 
-}}  // namespace selfea::math
+}  // namespace math
+}  // namespace selfea
 
 #endif  // SELFEA_MATH_MATRIX_H_
